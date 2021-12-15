@@ -2,6 +2,7 @@ import React from "react";
 
 import { Accessory } from "../../components/Accessory";
 import { BackButton } from "../../components/BackButton";
+import { Button } from "../../components/Button";
 import { ImageSlider } from "../../components/ImageSlider";
 
 import SpeedSvg from "../../assets/speed.svg";
@@ -25,6 +26,7 @@ import {
   Price,
   About,
   Accessories,
+  Footer,
 } from "./styles";
 
 export function CarDetails() {
@@ -71,6 +73,10 @@ export function CarDetails() {
           Architecto quam omnis iusto?
         </About>
       </Content>
+
+      <Footer>
+        <Button title="Confirmar" />
+      </Footer>
     </Container>
   );
 }
