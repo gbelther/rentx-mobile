@@ -28,8 +28,19 @@ import {
   Accessories,
   Footer,
 } from "./styles";
+import {
+  useNavigation,
+  NavigationProp,
+  ParamListBase,
+} from "@react-navigation/native";
 
 export function CarDetails() {
+  const { navigate }: NavigationProp<ParamListBase> = useNavigation();
+
+  function handleConfirmRental() {
+    navigate("Scheduling");
+  }
+
   return (
     <Container>
       <Header>
@@ -75,7 +86,10 @@ export function CarDetails() {
       </Content>
 
       <Footer>
-        <Button title="Confirmar" />
+        <Button
+          title="Escolher período do aluguel"
+          onPress={handleConfirmRental}
+        />
       </Footer>
     </Container>
   );

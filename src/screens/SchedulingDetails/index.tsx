@@ -1,4 +1,9 @@
 import React from "react";
+import {
+  NavigationProp,
+  ParamListBase,
+  useNavigation,
+} from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
 
 import { Accessory } from "../../components/Accessory";
@@ -43,6 +48,12 @@ import { useTheme } from "styled-components/native";
 
 export function SchedulingDetails() {
   const theme = useTheme();
+
+  const { navigate }: NavigationProp<ParamListBase> = useNavigation();
+
+  function handleConfirmRental() {
+    navigate("SchedulingComplete");
+  }
 
   return (
     <Container>
@@ -117,7 +128,11 @@ export function SchedulingDetails() {
       </Content>
 
       <Footer>
-        <Button title="Confirmar" />
+        <Button
+          title="Alugar Agora"
+          color={theme.colors.success}
+          onPress={handleConfirmRental}
+        />
       </Footer>
     </Container>
   );

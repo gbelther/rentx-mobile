@@ -19,9 +19,20 @@ import {
   Footer,
 } from "./styles";
 import { StatusBar } from "react-native";
+import {
+  NavigationProp,
+  ParamListBase,
+  useNavigation,
+} from "@react-navigation/native";
 
 export function Scheduling() {
   const theme = useTheme();
+
+  const { navigate }: NavigationProp<ParamListBase> = useNavigation();
+
+  function handleConfirmRental() {
+    navigate("SchedulingDetails");
+  }
 
   return (
     <Container>
@@ -59,7 +70,7 @@ export function Scheduling() {
       </Content>
 
       <Footer>
-        <Button title="Confirmar" />
+        <Button title="Confirmar" onPress={handleConfirmRental} />
       </Footer>
     </Container>
   );
