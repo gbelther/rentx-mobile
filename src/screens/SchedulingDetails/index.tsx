@@ -1,4 +1,6 @@
 import React from "react";
+import { RFValue } from "react-native-responsive-fontsize";
+import { useTheme } from "styled-components/native";
 import {
   NavigationProp,
   ParamListBase,
@@ -43,22 +45,24 @@ import {
   RentalPriceQuota,
   RentalPriceTotal,
 } from "./styles";
-import { RFValue } from "react-native-responsive-fontsize";
-import { useTheme } from "styled-components/native";
 
 export function SchedulingDetails() {
   const theme = useTheme();
 
-  const { navigate }: NavigationProp<ParamListBase> = useNavigation();
+  const { navigate, goBack }: NavigationProp<ParamListBase> = useNavigation();
 
   function handleConfirmRental() {
     navigate("SchedulingComplete");
   }
 
+  function handleBack() {
+    goBack();
+  }
+
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => {}} />
+        <BackButton onPress={handleBack} />
       </Header>
 
       <CarImages>
