@@ -23,7 +23,7 @@ import { CarDTO } from "../../dtos/CarDTO";
 import Logo from "../../assets/logo.svg";
 
 import { Car } from "../../components/Car";
-import { Load } from "../../components/Load";
+import { LoadAnimation } from "../../components/LoadAnimation";
 
 import { CarList, Container, Header, HeaderContent, TotalCars } from "./styles";
 
@@ -106,7 +106,7 @@ export function Home() {
         </HeaderContent>
       </Header>
       {loading ? (
-        <Load />
+        <LoadAnimation />
       ) : (
         <CarList
           data={cars}
