@@ -6,6 +6,11 @@ import {
   Keyboard,
   Alert,
 } from "react-native";
+import {
+  NavigationProp,
+  ParamListBase,
+  useNavigation,
+} from "@react-navigation/native";
 import { useTheme } from "styled-components";
 import * as Yup from "yup";
 
@@ -17,6 +22,7 @@ import { Container, Header, Form, SubTitle, Title, Footer } from "./styles";
 
 export function SignIn() {
   const theme = useTheme();
+  const { navigate }: NavigationProp<ParamListBase> = useNavigation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,6 +49,10 @@ export function SignIn() {
         );
       }
     }
+  }
+
+  function handleNewAccount() {
+    navigate("SignUpFirstStep");
   }
 
   return (
@@ -93,8 +103,8 @@ export function SignIn() {
               title="Criar conta gratuíta"
               color={theme.colors.background_secondary}
               light
-              onPress={() => {}}
-              enabled={false}
+              onPress={handleNewAccount}
+              enabled={true}
               loading={false}
             />
           </Footer>
