@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 import {
   useNavigation,
+  useRoute,
   NavigationProp,
   ParamListBase,
 } from "@react-navigation/native";
@@ -26,12 +28,39 @@ import {
   FormTitle,
 } from "./styles";
 
+interface Params {
+  user: {
+    name: string;
+    email: string;
+    driverLicense: string;
+  };
+}
+
 export function SignUpSecondStep() {
   const theme = useTheme();
   const { goBack, navigate }: NavigationProp<ParamListBase> = useNavigation();
+  const route = useRoute();
+
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+
+  const { user } = route.params as Params;
 
   function handleBack() {
     goBack();
+  }
+
+  function handleRegister() {
+    if (!password || !passwordConfirm) {
+      return Alert.alert("Informe a senha e a confirmação dela");
+    }
+
+    if (password !== passwordConfirm) {
+      return Alert.alert("As senhas não são iguais");
+    }
+
+    try {
+    } catch (error) {}
   }
 
   return (
@@ -54,8 +83,18 @@ export function SignUpSecondStep() {
 
           <Form>
             <FormTitle>2. Senha</FormTitle>
-            <PasswordInput iconName="lock" placeholder="Senha" />
-            <PasswordInput iconName="lock" placeholder="Repetir Senha" />
+            <PasswordInput
+              iconName="lock"
+              placeholder="Senha"
+              onChangeText={setPassword}
+              value={password}
+            />
+            <PasswordInput
+              iconName="lock"
+              placeholder="Repetir Senha"
+              onChangeText={setPasswordConfirm}
+              value={passwordConfirm}
+            />
           </Form>
 
           <Button color={theme.colors.success} title="Cadastrar" />
