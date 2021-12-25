@@ -9,10 +9,11 @@ import {
   NavigationProp,
   ParamListBase,
 } from "@react-navigation/native";
+import { useTheme } from "styled-components";
 
 import { BackButton } from "../../../components/BackButton";
 import { Bullet } from "../../../components/Bullet";
-import { Input } from "../../../components/Input";
+import { PasswordInput } from "../../../components/PasswordInput";
 import { Button } from "../../../components/Button";
 
 import {
@@ -25,15 +26,12 @@ import {
   FormTitle,
 } from "./styles";
 
-export function SignUpFirstStep() {
+export function SignUpSecondStep() {
+  const theme = useTheme();
   const { goBack, navigate }: NavigationProp<ParamListBase> = useNavigation();
 
   function handleBack() {
     goBack();
-  }
-
-  function handleNextStep() {
-    navigate("SignUpSecondStep");
   }
 
   return (
@@ -55,21 +53,12 @@ export function SignUpFirstStep() {
           </SubTitle>
 
           <Form>
-            <FormTitle>1. Dados</FormTitle>
-            <Input iconName="user" placeholder="Nome" />
-            <Input
-              iconName="mail"
-              placeholder="E-mail"
-              keyboardType="email-address"
-            />
-            <Input
-              iconName="credit-card"
-              placeholder="CNH"
-              keyboardType="numeric"
-            />
+            <FormTitle>2. Senha</FormTitle>
+            <PasswordInput iconName="lock" placeholder="Senha" />
+            <PasswordInput iconName="lock" placeholder="Repetir Senha" />
           </Form>
 
-          <Button title="Próximo" onPress={handleNextStep} />
+          <Button color={theme.colors.success} title="Cadastrar" />
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
