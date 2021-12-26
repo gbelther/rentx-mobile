@@ -13,7 +13,7 @@ import {
 } from "@react-navigation/native";
 import { useTheme } from "styled-components";
 
-import { Confirmation } from "../../Confirmation";
+import { api } from "../../../services/api";
 
 import { BackButton } from "../../../components/BackButton";
 import { Bullet } from "../../../components/Bullet";
@@ -52,7 +52,7 @@ export function SignUpSecondStep() {
     goBack();
   }
 
-  function handleRegister() {
+  async function handleRegister() {
     if (!password || !passwordConfirm) {
       return Alert.alert("Informe a senha e a confirmação dela");
     }
@@ -61,11 +61,23 @@ export function SignUpSecondStep() {
       return Alert.alert("As senhas não são iguais");
     }
 
-    navigate("Confirmation", {
-      nextScreenRoute: "SignIn",
-      title: "Conta criada!",
-      message: `Agora é só fazer login\ne aproveitar`,
-    });
+    await api
+      .post("/users", {
+        name: user.name,
+        email: user.email,
+        driver_license: user.driverLicense,
+        password,
+      })
+      .then(() => {
+        navigate("Confirmation", {
+          nextScreenRoute: "SignIn",
+          title: "Conta criada!",
+          message: `Agora é só fazer login\ne aproveitar`,
+        });
+      })
+      .catch(() => {
+        Alert.alert("Opa", "Não foi possível cadastrar");
+      });
   }
 
   return (
