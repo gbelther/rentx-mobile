@@ -18,11 +18,15 @@ import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { PasswordInput } from "../../components/PasswordInput";
 
+import { useAuth } from "../../hooks/auth";
+
 import { Container, Header, Form, SubTitle, Title, Footer } from "./styles";
 
 export function SignIn() {
   const theme = useTheme();
   const { navigate }: NavigationProp<ParamListBase> = useNavigation();
+
+  const { signIn } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +42,10 @@ export function SignIn() {
 
       await schema.validate({ email, password });
 
-      // fazer login
+      await signIn({
+        email,
+        password,
+      });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert("Opa", error.message);

@@ -26,9 +26,12 @@ import {
   Form,
   FormTitle,
 } from "./styles";
+import { useAuth } from "../../../hooks/auth";
 
 export function SignUpFirstStep() {
   const { goBack, navigate }: NavigationProp<ParamListBase> = useNavigation();
+
+  const { user } = useAuth();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
