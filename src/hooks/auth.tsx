@@ -50,7 +50,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
       const userCollection = database.get<ModelUser>("users");
-      await database.write(async () => {
+      await database.action(async () => {
         await userCollection.create((newUser) => {
           (newUser.user_id = user.id),
             (newUser.name = user.name),
