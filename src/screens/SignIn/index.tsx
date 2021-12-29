@@ -42,7 +42,7 @@ export function SignIn() {
 
       await schema.validate({ email, password });
 
-      await signIn({
+      signIn({
         email,
         password,
       });
